@@ -9,9 +9,7 @@ env:
   GRADLE_OPTS: -Dorg.gradle.daemon=false -Xmx6g -Xms6g
 
 jobs:
-  branch-build:
-    # Only run this on repositories in the 'spinnaker' org, not on forks.
-    if: startsWith(github.repository, 'spinnaker/')
+  dev-ci:
     runs-on: ubuntu-latest
     steps:
       # Setup gcloud CLI
