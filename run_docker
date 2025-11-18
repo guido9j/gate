@@ -1,0 +1,11 @@
+#!/bin/bash
+
+V=6.61.1
+I=gate:$V.beta$1
+
+if [ "TWO$2" = "TWO-b" ]
+then
+	docker build -t $I -f Dockerfile.copy-slim .
+fi
+
+docker run -it --entrypoint /bin/bash -v /Users/jeg02/spinnaker/gate-config:/opt/spinnaker/config -p 443:8084 $I

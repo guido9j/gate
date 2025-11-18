@@ -1,0 +1,4 @@
+FROM us-docker.pkg.dev/spinnaker-community/docker/gate:6.61.1
+COPY gate-web/build/install/gate /opt/gate
+USER spinnaker
+CMD ["/opt/gate/bin/gate"]
