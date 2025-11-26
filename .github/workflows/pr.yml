@@ -51,3 +51,6 @@ jobs:
           platforms: linux/amd64,linux/arm64
           tags: |
             "${{ env.CONTAINER_REGISTRY }}/${{ steps.build_variables.outputs.IMAGE }}:${{ steps.build_variables.outputs.VERSION }}-slim"
+          labels: |
+            org.opencontainers.image.source=https://github.com/${{ steps.build_variables.outputs.IMAGE }}
+            org.opencontainers.image.version=${{ steps.build_variables.outputs.VERSION }}
