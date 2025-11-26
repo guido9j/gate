@@ -44,6 +44,11 @@ public class AllowedAccountsSupport {
       if (permission == null) {
         return new ArrayList<>();
       }
+      System.out.println(
+          "["
+              + Thread.currentThread().getName()
+              + "] filterAllowedAccounts: permission="
+              + permission);
 
       if (permission.isLegacyFallback()) {
         // fetch allowed accounts as if fiat were not enabled (ie. check available roles against

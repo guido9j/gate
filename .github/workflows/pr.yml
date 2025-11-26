@@ -1,6 +1,6 @@
 name: PR Build
 
-on: [ pull_request ]
+#on: [ pull_request ]
 
 env:
   GRADLE_OPTS: -Dorg.gradle.daemon=false -Xmx6g -Xms6g

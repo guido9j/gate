@@ -1,10 +1,10 @@
 name: Branch Build
 
-on:
-  push:
-    branches:
-    - master
-    - release-*
+#on:
+#  push:
+#    branches:
+#    - master
+#    - release-*
 
 env:
   GRADLE_OPTS: -Dorg.gradle.daemon=false -Xmx6g -Xms6g

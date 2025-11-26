@@ -5,7 +5,10 @@ I=gate:$V.beta$1
 
 if [ "TWO$2" = "TWO-b" ]
 then
+	gradlew build --stacktrace gate-web:installDist 
+	if [ $? -ne 0 ]; then exit $?; fi
 	docker build -t $I -f Dockerfile.copy-slim .
+	if [ $? -ne 0 ]; then exit $?; fi
 fi
 
 docker run -it --entrypoint /bin/bash -v /Users/jeg02/spinnaker/gate-config:/opt/spinnaker/config -p 443:8084 $I

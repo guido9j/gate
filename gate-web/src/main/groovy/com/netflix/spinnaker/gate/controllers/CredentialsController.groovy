@@ -64,6 +64,8 @@ class CredentialsController {
   @ApiOperation(value = "Retrieve a list of accounts")
   @RequestMapping(method = RequestMethod.GET)
   List<Account> getAccounts(@SpinnakerUser User user, @RequestParam(value = "expand", required = false) boolean expand) {
+    String head = "[${Thread.currentThread().getName()}] CredentialsController.getAccounts(user, expand): "
+    println "${head} user=${user.username} expand=${expand}"
     List<AccountDetails> allAccounts = getAccountDetailsWithAuthorizedFlag(user)
     if (expand) {
       return allAccounts
@@ -72,13 +74,22 @@ class CredentialsController {
   }
 
   private List<AccountDetails> getAccountDetailsWithAuthorizedFlag(User user) {
+    String head = "[${Thread.currentThread().getName()}] CredentialsController.getAccountDetailsWithAuthorizedFlag(user): "
+    println "${head} user=${user.username}"
     List<AccountDetails> allAccounts = accountLookupService.getAccounts()
+    allAccounts.eachWithIndex { acc, index ->
+        println "${head} allAccounts[${index}]=${acc.accountType}"
+    }
     Collection<String> allowedAccounts = user == null ?
       Collections.emptySet() :
       allowedAccountsSupport.filterAllowedAccounts(user.username, user.roles)
 
+    println "${head} allowedAccounts=${allowedAccounts}"
     for (AccountDetails account : allAccounts) {
       account.set('authorized', allowedAccounts.contains(account.name) ? Boolean.TRUE : Boolean.FALSE)
+    }
+    allAccounts.eachWithIndex { acc, index ->
+        println "${head} filtered: allAccounts[${index}]=${acc.accountType}"
     }
     return allAccounts
   }
