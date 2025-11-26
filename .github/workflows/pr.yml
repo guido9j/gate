@@ -49,6 +49,7 @@ jobs:
           context: .
           file: Dockerfile.slim
           platforms: linux/amd64,linux/arm64
+          push: true
           tags: |
             "${{ env.CONTAINER_REGISTRY }}/${{ steps.build_variables.outputs.IMAGE }}:${{ steps.build_variables.outputs.VERSION }}-slim"
           labels: |
