@@ -38,7 +38,7 @@ jobs:
         run: |
           echo IMAGE="${GITHUB_REPOSITORY}" >> $GITHUB_OUTPUT
           echo REPO="${GITHUB_REPOSITORY##*/}" >> $GITHUB_OUTPUT
-          echo VERSION="v6.61.1-dev-pr-$(git rev-parse --short HEAD)-$(date --utc +'%Y%m%d%H%M')" >> $GITHUB_OUTPUT
+          echo VERSION="6.61.1-dev-pr-$(git rev-parse --short HEAD)-$(date --utc +'%Y%m%d%H%M')" >> $GITHUB_OUTPUT
       - name: Build
         env:
           ORG_GRADLE_PROJECT_version: ${{ steps.build_variables.outputs.VERSION }}
