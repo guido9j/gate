@@ -54,11 +54,16 @@ public class DefaultProviderLookupService implements ProviderLookupService, Acco
 
   private List<ClouddriverService.AccountDetails> loadAccounts() {
     var accounts = AuthenticatedRequest.allowAnonymous(clouddriverService::getAccountDetails);
+    String head =
+        "[" + Thread.currentThread().getName() + "] DefaultProviderLookupService.loadAccounts(): ";
+    System.out.println(head + "accounts=" + accounts);
+
     // migration support, prefer permissions configuration, translate requiredGroupMembership
     // (for CredentialsService in non fiat mode) into permissions collection.
     //
     // Ignore explicitly set requiredGroupMemberships if permissions are also present.
     for (var account : accounts) {
+      System.out.println(head + "account.getAccountType()=" + account.getAccountType());
       Map<String, Collection<String>> permissions = account.getPermissions();
       Collection<String> requiredGroupMembership = account.getRequiredGroupMembership();
       if (permissions != null) {
